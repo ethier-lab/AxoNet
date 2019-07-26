@@ -4,4 +4,5 @@ This code was used to train the AxoNet convolutional neural network, which is pa
 To watch the model train on the dataset, run main.py and sit back.
 
 ## Dependencies
-Python 3, matplotlib, numpy, skimage, PIL, scipy, keras, and tensorflow.
+Python 3, matplotlib, numpy, skimage, PIL, scipy, keras, and tensorflow.  
+We recommend [Anaconda](https://www.anaconda.com/distribution/) for dependency management
