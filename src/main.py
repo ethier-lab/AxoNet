@@ -5,10 +5,10 @@ Created on Tue May 14 08:26:14 2019
 @author: mritch3
 """
 
-from model_3 import *
-from data_3 import *
-import os, glob, time
-import matplotlib as mp
+from model import *
+from data import *
+import data
+import os, glob
 from matplotlib.pyplot import *
 import numpy as np
 import skimage.transform as trans
@@ -17,26 +17,46 @@ from PIL import Image
 from scipy import stats
 import datetime
 
+redoMover=False
 
+#get to root directory
 os.chdir('..')
+home=os.getcwd()
+
+#%% Check for data.mat and download if needed
+os.chdir('src')
+import setup #used to download data.mat if needed 
+
+
+#%% Check if data has been unloaded
+os.chdir(home)
+dataCheck=glob.glob('data/test/gt/*.npy')
+if len(dataCheck)==0 or redoMover:
+    os.chdir('src')
+    import mover #used to download data if needed 
+
+os.chdir(home)
 #os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 batch_size=1
 n_reps=1
 
 
-date = datetime.datetime.now().strftime("%m%d%Y_%H%M%S")
-mName='unet_axons'+date+'.hdf5'
-mName='unet_axons_3.hdf5'
-
-generator = trainGenerator(batch_size,n_reps,train_path='data\\train',image_folder='image',gt_folder='label',subset='training')
 
 
+
+
+#%%Setting up dataset use
+print('Setting up dataset use...')
+date  = datetime.datetime.now().strftime("%m%d%Y_%H%M%S")
+mName = 'saved models/unet_axons_plateau.hdf5'
+generator = trainGenerator(batch_size,n_reps)
 
 #%% training setup
-Model=unet()
+Model=unet(mName)
 model_checkpoint = ModelCheckpoint(mName, monitor='loss',verbose=2, save_best_only=True)
 earlystop=EarlyStopping(patience=40)
 reduceLRplat=ReduceLROnPlateau(factor=0.1, patience=20, verbose=1, cooldown=0, min_lr=0)
+#create validation generator for model evaluation at the end of each epoch
 valGen=valGenerator()
 
 
@@ -53,9 +73,8 @@ legend(['train', 'test'], loc='upper left')
 show()
 
 
-# %% Test   
-#Model=unet('vgg_axons.hdf5')
-(outs,names)=evaluate(Model,'val')
+# %% Test model use
+(outs,names)=evaluate(Model,'val') # test on validation set
 
 
 # %% Plot

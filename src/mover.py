@@ -5,26 +5,22 @@ Created on Tue May 14 08:31:39 2019
 @author: mritch3
 """
 
-import os, glob, math
+import os, glob
 import numpy as np, scipy.stats as st
 from scipy.io import loadmat
-from skimage.filters import gaussian 
-import scipy.misc
-from PIL import Image
-from skimage.transform import resize
-import matplotlib as mp
 p=.6 #training p
 
+os.chdir('..') #get to root directory
+home=os.getcwd()
 
-#x=loadmat(r'C:\Users\mritch3\Desktop\L2UBD\data\split_Ims_Gts_2.mat')
-x=loadmat(r'C:\Users\mritch3\Desktop\L2UBD\data\data.mat')
+x=loadmat(home + r'\data\data.mat')
 c=x['c'][0,:]
 ims=x['images'][0,:]
 gt=x['gt'][0,:]
 countTotals=x['countTotals'][0,:]
 annotations=x['annotations'][0,:]
 
-randVec=np.loadtxt(r'C:\Users\mritch3\Desktop\L2UBD\data\randvec.txt').astype(int)
+randVec=np.loadtxt(r'data/randvec.txt').astype(int)
 #annotations=annotations[randVec]
 nameList=[]
 
@@ -47,30 +43,9 @@ for i in range(len(annotations)):
         ciOut[i,:]=np.asarray([a,a,c[i],a,0])
         diffs[i,:]=0
 
-## %% blur annotations, retaining same count
-#for i in range(len(gt)):
-#    check.append(sum(sum((gt[i]))))
-#    gt[i]=gaussian(gt[i],sigma=8,preserve_range=True)
-#    check2.append(sum(sum((gt[i]))))
-#    if check[i]!=0:
-#        gt[i]=gt[i]*(check[i]/check2[i])
-#    check2[i]=(sum(sum((gt[i]))))
-
-
 
     
 sze=192
-# %% resize and rescale 
-#for i in range(len(c)):
-#    ims[i]=resize(ims[i],(sze,sze),anti_aliasing=False)
-#    
-#    s1=sum(sum(gt[i]))
-#    gt[i]=resize(gt[i],(sze,sze),anti_aliasing=False)
-#    s2=sum(sum(gt[i]))
-#    if (s2!=0):
-#        gt[i]=gt[i]*(s1/s2)
-
-
 check=[]
 # %% blur annotations, retaining same count
 for i in range(len(gt)):
@@ -90,7 +65,7 @@ print('deposit all')
 count=[0,0,0]
 
 #chdir+delete
-os.chdir(r'C:\Users\mritch3\Desktop\L2UBD\data\all')
+os.chdir(home + '/data/all')
 files = glob.glob('*')
 for f in files:
     os.remove(f)
@@ -113,11 +88,7 @@ for i in range(len(c)):
     im_this=ims[i]
     gt_this=gt[i]
     
-        
-    #np.save(name+'_image' + '.npy', im_this)
-    #np.save(name+'_gt'+ '.npy', gt_this)
-    
-    print(i/len(c))
+    #print(i/len(c))
 
 # %% randomize along previously used vec
 if True:

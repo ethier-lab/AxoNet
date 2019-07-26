@@ -13,7 +13,6 @@ import skimage.transform as trans
 import matplotlib as mp
 from PIL import Image
 from skimage import exposure
-import numpy as np
 import math
 
 mult=1000
@@ -26,13 +25,13 @@ def imChange(im):
     currently results in [-1,1] range
     '''
     sat=1.00
-    
+    im=im/np.max(im)
     im=np.clip(im*sat,0,1)
     im=im/np.max(im)
     im=2*(im-np.mean(im))
     return im
         
-def trainGenerator(batch_size,n_reps,train_path,image_folder,gt_folder,subset):
+def trainGenerator(batch_size,n_reps,train_path='data\\train',image_folder='image',gt_folder='label',subset='training'):
     '''
     generates input images and masks to be fed to model trainer function
     
