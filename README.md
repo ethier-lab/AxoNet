@@ -15,5 +15,5 @@ This work is licensed under a Apache 2.0 license.
 Users at for-profit commercial organizations are requested to provide a donation, in an amount of their choice, to  support the wonderful work of the [National Glaucoma Research Program of the BrightFocus Foundation](https://www.brightfocus.org).   
 Users in the non-profit sector, i.e. at academic, foundation and governmental organizations, are requested to consider a similar donation.   
 
-If you publish papers using this software, please cite the following preprint: https://arxiv.org/abs/1908.02919.  
+If you publish papers using this software, please cite this [preprint](https://arxiv.org/abs/1908.02919).  
 This tool was developed by the Ethier Lab at the Georgia Institute of Technology.
