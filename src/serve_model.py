@@ -5,8 +5,8 @@ Created on Thu Jul 11 12:55:06 2019
 @author: mritch3
 """
 
-from model_915_plateau import *
-from data_915_plateau import *
+from model import *
+from data import *
 import os, glob, time
 import matplotlib as mp
 from matplotlib.pyplot import *
@@ -33,7 +33,7 @@ export_path=r'export_model'
 batch_size=1
 n_reps=1
 
-mName='unet_axons_plateau.hdf5'
+mName='saved models/unet_axons_plateau.hdf5'
 
 #%% load model
 
