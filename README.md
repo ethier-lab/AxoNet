@@ -20,4 +20,4 @@ This tool was developed by the Ethier Lab at the Georgia Institute of Technology
 
 ## Data Availability
 Run main.py to download the rat optic nerve image and annotation dataset.  
-The results from our counting method comparisons are located in "rat and NHP count data.xlsx" inside the data folder. 
+The results from our counting method comparisons are located in "final results- comparison with both nhp and rat.xlsx" inside the data folder. 
