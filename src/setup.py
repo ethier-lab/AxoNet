@@ -52,10 +52,10 @@ if __name__ == "__main__":
     
     
 #%% script
-dest=home + '\data\data.mat'
+dest=home + '\data\data_updated_3-22-2020.mat'
 
 if not (os.path.exists(dest)):
-    print('Downloading data.mat...')
-    fileId = '1NQfVtaj33tbbor23vL8pA_kOKJ7QXzOp'
+    print('Downloading data_updated_3-22-2020.mat...')
+    fileId = '19Lu6DmfuasfeEDde1IkdtxrHvloWdBF8'
     download_file_from_google_drive(fileId, dest)
     

@@ -52,7 +52,7 @@ n_reps=1
 #%%Setting up dataset use
 print('Setting up dataset use...')
 date  = datetime.datetime.now().strftime("%m%d%Y_%H%M%S")
-mName = 'saved models/unet_axons_plateau.hdf5'
+mName = 'saved models/final_resampled_3-22-2020.hdf5'
 generator = trainGenerator(batch_size,n_reps)
 
 #%% training setup
