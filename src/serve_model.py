@@ -21,7 +21,7 @@ from tensorflow.python.saved_model import signature_constants
 from tensorflow.python.saved_model import signature_def_utils
 from tensorflow.python.saved_model import tag_constants
 from tensorflow.python.saved_model.utils import build_tensor_info
-
+from keras import backend as K
 
 
 
@@ -33,19 +33,22 @@ export_path=r'export_model'
 batch_size=1
 n_reps=1
 
-mName='saved models/unet_axons_plateau.hdf5'
+mName='saved models/final_resampled_3-22-2020.hdf5'
 
 #%% load model
 
 
 #load model from saved file
-model = tf.keras.models.load_model(mName,custom_objects={'mean_squared_error_weighted': mean_squared_error_weighted,'countErr': countErr})
-#get initializer
-init=tf.global_variables_initializer()
-#get current keras session. stop other code from running while this is being done
-sess= tf.keras.backend.get_session()
-#initialize model
-sess.run(init)
+model = tf.keras.models.load_model(mName,custom_objects={'mean_squared_error_weighted': mean_squared_error_weighted,'countErr': countErr,'countErr_relative': countErr_relative,'countErr_signed': countErr_signed})
 
-#change inputs to match whatever custom loss functs you used
-tf.saved_model.simple_save(sess, export_path, inputs={'input_image': model.input},outputs={'output_map': model.output})
+
+model.save("AxoNet-model")
+#get initializer
+# init=tf.compat.v1.global_variables_initializer()
+# #get current keras session. stop other code from running while this is being done
+# sess= tf.compat.v1.keras.backend.get_session()
+# #initialize model
+# sess.run(init)
+
+# #change inputs to match whatever custom loss functs you used
+# tf.saved_model.simple_save(sess, export_path, inputs={'input_image': model.input},outputs={'output_map': model.output})
