@@ -13,7 +13,7 @@ import matplotlib.pyplot as pyp
 import numpy as np
 import PIL as pil
 from scipy import stats
-from keras.callbacks import ModelCheckpoint, EarlyStopping, ReduceLROnPlateau, Callback, LearningRateScheduler
+from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping, ReduceLROnPlateau, Callback, LearningRateScheduler
 import tensorflow as tf
 
 #%% script setup

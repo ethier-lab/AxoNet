@@ -9,10 +9,10 @@ Heavy use of tensorflow and keras.
 
 import data
 #import max_subarray_tf
-import keras.models as models
-import keras.layers as layers
-import keras.optimizers as kOpt
-from keras import backend as keras
+import tensorflow.keras.models as models
+import tensorflow.keras.layers as layers
+import tensorflow.keras.optimizers as kOpt
+from tensorflow.keras import backend as keras
 import tensorflow as tf
 #import tensorflow_probability as tfp
 
