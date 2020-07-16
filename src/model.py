@@ -78,7 +78,8 @@ def unet(pretrained_weights = None,input_shape = (224,224,1)):
     conv10 = layers.Conv2D(1, 1 ,activation = 'relu',)(conv9)
     
     model = models.Model(inputs = inputs, outputs = conv10) 
-    model.compile(optimizer = kOpt.Adam(lr = 1E-4), loss = mean_squared_error_weighted, metrics = ['mean_absolute_error','mean_squared_error',countErr,countErr_signed,countErr_relative]) 
+    #model.compile(optimizer = kOpt.Adam(lr = 1E-4), loss = mean_squared_error_weighted, metrics = ['mean_absolute_error','mean_squared_error',countErr,countErr_signed,countErr_relative]) 
+    model.compile(optimizer = kOpt.Adam(lr = 1E-4), loss = mean_squared_error_weighted) 
     #decay = 1E-4/100
     #load existing model if provided
     if(pretrained_weights):
