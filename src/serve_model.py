@@ -11,7 +11,7 @@ import os, glob, time
 import matplotlib as mp
 from matplotlib.pyplot import *
 import numpy as np
-import skimage.transform as trans
+#import skimage.transform as trans
 import PIL as pil
 from PIL import Image
 from scipy import stats
@@ -46,14 +46,15 @@ mName='saved models/final_resampled_3-22-2020.hdf5'
 
 #%% RUN THIS IF TF VERSION 1
 #get initializer
-model = tf.keras.models.load_model(mName,custom_objects={'mean_squared_error_weighted': mean_squared_error_weighted,'countErr': countErr,'countErr_relative': countErr_relative,'countErr_signed': countErr_signed})
-#model = unet()
-#model.load_weights(mName)
+#model = tf.keras.models.load_model(mName,custom_objects={'mean_squared_error_weighted': mean_squared_error_weighted,'countErr': countErr,'countErr_relative': countErr_relative,'countErr_signed': countErr_signed})
+model = unet()
+model.load_weights(mName)
 #get initializer
 init=tf.global_variables_initializer()
 #get current keras session. stop other code from running while this is being done
 sess= tf.keras.backend.get_session()
 #initialize model
 sess.run(init)
+model.load_weights(mName)
 #change inputs to match whatever custom loss functs you used
-tf.saved_model.simple_save(sess, export_path, tags=[tag_constants.SERVING], inputs={'input_image': model.input},outputs={'output_map': model.output})
+tf.saved_model.simple_save(sess, export_path, inputs={'input_image': model.input},outputs={'output_map': model.output})
